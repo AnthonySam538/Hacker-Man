@@ -20,8 +20,12 @@ public class HackerManForm : Form
 
   // Create Controls
   private Label text = new Label();
+  
+  // Create Rectangles
+  private Rectangle blueRectangle;
+  private Rectangle blackRectangle;
 
-  // Create timer (It helps simulate loading)
+  // Create timer (It simulates loading)
   private static System.Timers.Timer myTimer = new System.Timers.Timer(50); //that should be 20 times a second
 
   public HackerManForm()
@@ -33,11 +37,18 @@ public class HackerManForm : Form
 
     // Set up the text on the screen
     text.Text = "Unencrypting data";
-    text.Size = new Size(formWidth * 8/10, formHeight/6);
-    text.Location = new Point(0, 0);
+    text.Size = new Size(formWidth * 5/6, formHeight/6);
+    text.Location = new Point(formWidth/12, formHeight/3 - 5); //center of the bottom of the top half
     
     // Add the controls to the form
     Controls.Add(text);
+    
+    // Set up the rectangles
+    blueRectangle = new Rectangle(text.Left, text.Bottom + 5, text.Size.Width, text.Size.Height);
+    blackRectangle = new Rectangle(blueRectangle.Left + 3, blueRectangle.Top + 3, blueRectangle.Width - 6, blueRectangle.Height - 6);
+    
+    // Tell the event which method to call (method is defined later)
+    myTimer.Elapsed += new ElapsedEventHandler(fillLoadingBar);
 
     // Start the clock
     myTimer.Enabled = true;
@@ -45,9 +56,9 @@ public class HackerManForm : Form
 
   protected override void OnPaint(PaintEventArgs e)
   {
-    Graphics graphics = e.Graphics;
+    Graphics graphics = e.Graphics; //this is used to draw objects on screen
 
-    graphics.FillRectangle(Brushes.DodgerBlue); //in the center of the bottom half
-    graphics.FillRectangle(Brushes.Black); //in the center of the bottom
+    graphics.FillRectangle(Brushes.DodgerBlue, blueRectangle); //center of the top of the bottom half
+    graphics.FillRectangle(Brushes.BackColor, blackRectangle); //in the center of the middle of the DodgerBlue rectangle
   }
 }
