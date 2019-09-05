@@ -12,14 +12,14 @@ echo "First, remove any potentially outdated .dll or .exe files using the keywor
 rm *.dll
 rm *.exe
 
-echo "Display the list of the remaining source files in the terminal using the keyword ls"
+echo "Display the list of the remaining files in the terminal using the keyword ls"
 ls -l
 
 echo "Compile HackerManForm.cs to create the file: HackerManForm.dll"
-mcs -target:library -read:System.Windows.Forms.dll -out:DysfunctionalForm.dll DysfunctionalForm.cs
+mcs -target:library -r:System.Windows.Forms.dll -r:System.Drawing.dll -out:HackerManForm.dll HackerManForm.cs
 
 echo "Compile HackerManMain.cs and link the previously created dll file(s) to create an executable (.exe) file."
-mcs -read:System.Windows.Forms.dll -read:HackerManForm.dll -out:HackerMan.exe HackerManMain.cs
+mcs -r:System.Windows.Forms.dll -r:HackerManForm.dll -out:HackerMan.exe HackerManMain.cs
 
 echo "Display the updated list of files in the folder, now including the newly created .dll and .exe files"
 ls -l

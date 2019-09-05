@@ -14,9 +14,7 @@ public class HackerManMain
 {
   public static void Main()
   {
-    System.Console.WriteLine("The hacker man program will begin now.");
     HackerManForm HackerMan_App = new HackerManForm();
     Application.Run(HackerMan_App);
-    System.Console.WriteLine("The hacker man program will end now.")
   }
 }
